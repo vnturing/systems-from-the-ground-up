@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="The laboratory — an original, practical computer systems course."><meta name="color-scheme" content="light dark"><title>The laboratory · Below the Surface</title><link rel="icon" href="assets/mark.svg" type="image/svg+xml"><link rel="stylesheet" href="assets/course.css"><script defer src="assets/catalog.js"></script><script defer src="assets/models.js"></script><script defer src="assets/study.js"></script><script defer src="assets/workbenches.js"></script><script defer src="assets/course.js"></script></head>
+<body data-prefix=""><a class="skip" href="#main">Skip to content</a><header class="topbar"><a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true">≋</span><span>Below the Surface<small>A programmer’s systems course</small></span></a><nav aria-label="Main navigation"><a href="index.html#course">Course</a><a href="labs.html">Labs</a><a href="reference.html">Field notes</a><a href="study.html">My study</a><a href="sources.html">Sources</a></nav><button type="button" id="theme-toggle" class="icon-button" aria-label="Switch color theme">◐</button></header>
+<div class="page-layout"><main id="main" tabindex="-1"><section class="wide-document"><p class="eyebrow">Practice with consequences</p><h1>The laboratory.</h1><p class="dek">Nine original investigations. Reference programs, meaningful checks, boundary cases, and extensions that require an explanation.</p><div class="button-row"><a class="button" href="downloads/labs.zip" download>Download all lab files ↓</a><a href="setup.html">Set up your environment →</a></div><div class="card-grid"><a class="resource-card" href="labs/01-artifacts.html"><span class="eyebrow">Lab 01 · 2–3 hours</span><h2>An artifact and representation notebook</h2><p> Start from the reference
+Download the lab bundle from the course home, unzip it, and open a terminal in the extracted directory. The bundle contains labs/ at its root. In a repository checkout, use the repository root. Run:</p><span>Open the investigation →</span></a><a class="resource-card" href="labs/02-machine.html"><span class="eyebrow">Lab 02 · 3–5 hours</span><h2>Machine code and the first bad write</h2><p>sh
+python3 labs/check.py --lab 2
+cc -std=c17 -O0 -g -S labs/02-machine/compute.c -o compute-O0.s
+cc -std=c17 -O2 -g -S labs/02-machine/compute.c -o compute-O2.s
+cc -std=c17 -g labs/02-machine/main.c labs/02-machine/compute.c -o ma</p><span>Open the investigation →</span></a><a class="resource-card" href="labs/03-locality.html"><span class="eyebrow">Lab 03 · 3–5 hours</span><h2>A cache hypothesis on a real machine</h2><p>sh
+python3 labs/check.py --lab 3
+cc -std=c17 -O2 -g labs/03-locality/matrix.c -o matrix
+./matrix 1024
+</p><span>Open the investigation →</span></a><a class="resource-card" href="labs/04-arena.html"><span class="eyebrow">Lab 04 · 3–5 hours</span><h2>An allocator with explicit invariants</h2><p>sh
+python3 labs/check.py --lab 4
+python3 labs/check.py --lab 4 --sanitize
+</p><span>Open the investigation →</span></a><a class="resource-card" href="labs/05-pipeline.html"><span class="eyebrow">Lab 05 · 2–4 hours</span><h2>A pipeline that can finish</h2><p>sh
+python3 labs/check.py --lab 5
+cc -std=c17 -Wall -Wextra -Wpedantic labs/05-pipeline/pipeline.c -o pipeline
+./pipeline
+</p><span>Open the investigation →</span></a><a class="resource-card" href="labs/06-io.html"><span class="eyebrow">Lab 06 · 2–4 hours</span><h2>Copy every byte, report every failure</h2><p>sh
+python3 labs/check.py --lab 6
+cc -std=c17 -Wall -Wextra -Wpedantic labs/06-io/copy.c labs/06-io/io.c -o byte-copy
+printf &#x27;a short example\n&#x27; | ./byte-copy
+</p><span>Open the investigation →</span></a><a class="resource-card" href="labs/07-frames.html"><span class="eyebrow">Lab 07 · 4–6 hours</span><h2>A bounded frame service</h2><p>sh
+python3 labs/check.py --lab 7
+</p><span>Open the investigation →</span></a><a class="resource-card" href="labs/08-queue.html"><span class="eyebrow">Lab 08 · 4–6 hours</span><h2>A queue that drains and stops</h2><p>sh
+python3 labs/check.py --lab 8
+cc -std=c17 -Wall -Wextra -Wpedantic -pthread labs/08-queue/queue.c -o queue
+./queue 4
+</p><span>Open the investigation →</span></a><a class="resource-card" href="labs/09-capstone.html"><span class="eyebrow">Lab 09 · 6–10 hours</span><h2>A source-to-hardware investigation</h2><p> Required baseline
+Run all native lab checks and preserve the output. Run sanitizer checks where supported. Add the real TCP-loopback path where permitted. Document unexecuted platform-specific steps. Keep byte-for-byte transforma</p><span>Open the investigation →</span></a></div></section></main></div>
+<footer class="footer"><span>Follow the program. Question the model.</span><span><a href="about.html">About &amp; approach</a> · <a href="setup.html">Lab setup</a> · <a href="sources.html">Attribution</a></span><p>Original course inspired by the programmer-centered approach of CS:APP. Independent and unaffiliated. No textbook purchase required.</p></footer><div id="announcement" role="status" aria-live="polite" class="sr-only"></div><noscript><p class="noscript">All reading material and worked solutions are available without JavaScript. Quizzes, workbenches, search, and browser-local study tools require JavaScript.</p></noscript></body></html>

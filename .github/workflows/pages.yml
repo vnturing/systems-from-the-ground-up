@@ -1,0 +1,55 @@
+name: Check and publish course
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build static course
+        run: python3 tools/build.py
+      - name: Validate pages and teaching contracts
+        run: python3 tools/validate.py
+      - name: Check browser model calculations
+        run: node tools/test-models.cjs
+      - name: Check native artifacts and TCP loopback
+        run: python3 labs/check.py --loopback
+      - name: Check memory diagnostics
+        run: python3 labs/check.py --sanitize --loopback
+      - name: Upload static artifact
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    if: github.event_name != 'pull_request'
+    needs: verify
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Configure Pages
+        uses: actions/configure-pages@v5
+      - name: Deploy static artifact
+        id: deployment
+        uses: actions/deploy-pages@v4
